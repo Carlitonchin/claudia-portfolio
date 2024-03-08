@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <div class="w-40 h-20 bg-blue-500 my-animate-rotate"></div>
+</Layout>
+
+<style>
+  @keyframes rotate {
+    0% {
+      opacity: 0;
+      transform: rotate(5deg);
+    }
+
+    50% {
+      opacity: 1;
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .my-animate-rotate {
+    animation: rotate 200ms ease-in-out;
+  }
+</style>
