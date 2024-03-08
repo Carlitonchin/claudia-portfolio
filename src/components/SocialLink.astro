@@ -1,0 +1,29 @@
+---
+import Instagram from "@/components/icons/Instagram.astro";
+import { getSocialUrl } from "@/data/social.ts";
+import { type socialType } from "@/data/social";
+
+interface Props {
+  type: socialType;
+}
+
+const { type } = Astro.props;
+
+const getSocialBackground = () => {
+  switch (type) {
+    case "instagram":
+      return "bg-pink-500/15";
+    default:
+      return "bg-neutral-300/15";
+  }
+};
+---
+
+<a href={getSocialUrl(type)}>
+  <div
+    class={"hover:scale-105 p-2 duration-150 rounded-full w-fit h-fit " +
+      getSocialBackground()}
+  >
+    {type == "instagram" && <Instagram />}
+  </div>
+</a>

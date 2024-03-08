@@ -1,24 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Main from "@/components/sections/Main.astro";
 ---
 
 <Layout title="Claudia Marin">
-  <main
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-2 w-full h-fit gap-4"
-  >
-    <div
-      class="w-full h-fit bg-white shadow-lg rounded-lg p-4 flex flex-col gap-y-4"
-    >
-      <img class="w-20 h-20 rounded-full" src="/img/profile.jpg" />
-      <h1 class="text-2xl text-font-title font-bold">Claudia Marin</h1>
-      <p>
-        Lorem ipsum dolor sit amet lorem id consectetur neque congue tristique.
-      </p>
-      <a class="font-bold text-font-title" href="mailto:claudia@gmail.com"
-        >claudia@gmail.com</a
-      >
-    </div>
-    <div class="w-full min-h-52 bg-red-500 md:row-span-2 lg:col-span-2">2</div>
-    <div class="w-full min-h-52 bg-red-500">3</div>
-  </main>
+  <Main />
 </Layout>

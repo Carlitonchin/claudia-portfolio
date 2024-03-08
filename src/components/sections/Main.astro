@@ -1,0 +1,28 @@
+---
+import Card from "@/components/Card.astro";
+import Instagram from "@/components/icons/Instagram.astro";
+import SocialLink from "@/components/SocialLink.astro";
+---
+
+<main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-fit gap-4">
+  <Card className="flex flex-col gap-y-4 ">
+    <img class="w-20 h-20 rounded-full" src="/img/profile.jpg" />
+    <h1 class="text-2xl text-font-title font-bold">Claudia Marin</h1>
+    <p>
+      Lorem ipsum dolor sit amet lorem id consectetur neque congue tristique.
+    </p>
+    <a class="font-bold text-font-title" href="mailto:claudia@gmail.com"
+      >claudia@gmail.com</a
+    >
+  </Card>
+  <Card className="w-full min-h-4 md:row-span-2 lg:col-span-2" />
+  <Card className="w-full min-h-4 flex flex-col h-fit">
+    <h2 class="font-bold text-font-title text-lg mb-1">
+      Follow me on social media
+    </h2>
+    <p>Lorem ipsum dolor sit amet lorem id.</p>
+    <div class="mt-4">
+      <SocialLink type="instagram" />
+    </div>
+  </Card>
+</main>
