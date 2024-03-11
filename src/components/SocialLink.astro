@@ -1,5 +1,7 @@
 ---
 import Instagram from "@/components/icons/Instagram.astro";
+import Facebook from "@/components/icons/Facebook.astro";
+import Twitter from "@/components/icons/Twitter.astro";
 import { getSocialUrl } from "@/data/social.ts";
 import { type socialType } from "@/data/social";
 
@@ -13,6 +15,10 @@ const getSocialBackground = () => {
   switch (type) {
     case "instagram":
       return "bg-pink-500/15";
+    case "facebook":
+      return "bg-blue-500/15";
+    case "twitter":
+      return "bg-cyan-400/15";
     default:
       return "bg-neutral-300/15";
   }
@@ -25,5 +31,7 @@ const getSocialBackground = () => {
       getSocialBackground()}
   >
     {type == "instagram" && <Instagram />}
+    {type == "facebook" && <Facebook />}
+    {type == "twitter" && <Twitter />}
   </div>
 </a>
