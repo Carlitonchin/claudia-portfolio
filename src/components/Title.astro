@@ -1,0 +1,94 @@
+---
+interface Props {
+  id?: string;
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "a";
+  className?: string;
+  href?: string;
+  size?: "large" | "medium" | "normal";
+  props?: object;
+}
+
+const { variant, className, href, size, props } = Astro.props;
+---
+
+{
+  variant == "h1" && (
+    <h1
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h1>
+  )
+}
+{
+  variant == "h2" && (
+    <h2
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h2>
+  )
+}
+{
+  variant == "h3" && (
+    <h3
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h3>
+  )
+}
+{
+  variant == "h4" && (
+    <h4
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h4>
+  )
+}
+{
+  variant == "h5" && (
+    <h5
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h5>
+  )
+}
+{
+  variant == "h6" && (
+    <h6
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </h6>
+  )
+}
+{
+  variant == "a" && (
+    <a
+      {...props}
+      href={href ?? "#"}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </a>
+  )
+}
+{
+  (variant == "span" || variant == undefined) && (
+    <span
+      {...props}
+      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+    >
+      <slot />
+    </span>
+  )
+}

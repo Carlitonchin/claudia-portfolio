@@ -1,25 +1,61 @@
 ---
 import Card from "@/components/Card.astro";
-import Instagram from "@/components/icons/Instagram.astro";
 import SocialLink from "@/components/SocialLink.astro";
+import Title from "@/components/Title.astro";
+import EmailIcon from "@/components/icons/Email.astro";
+import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
 ---
 
 <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-fit gap-4">
   <Card className="flex flex-col gap-y-4 ">
     <img class="w-20 h-20 rounded-full" src="/img/profile.jpg" />
-    <h1 class="text-2xl text-font-title font-bold">Claudia Marin</h1>
+    <Title variant="h1" size="large">Claudia Marin</Title>
     <p>
       Lorem ipsum dolor sit amet lorem id consectetur neque congue tristique.
     </p>
-    <a class="font-bold text-font-title" href="mailto:claudia@gmail.com"
-      >claudia@gmail.com</a
+    <Title
+      props={{ id: "emailLink" }}
+      className="flex items-center hover:text-primary duration-100"
+      variant="a"
+      href="mailto:claudia@gmail.com"
     >
+      <span class="text-orange-600 mr-2">
+        <EmailIcon />
+      </span> claudia@gmail.com
+      <span class="duration-100" id="arrow">
+        <ArrowUpRightIcon />
+      </span>
+    </Title>
   </Card>
-  <Card className="w-full min-h-4 md:row-span-2 lg:col-span-2" />
+  <Card
+    className="w-full min-h-4 md:row-span-2 lg:col-span-2 flex flex-col justify-center"
+  >
+    <Title variant="h2" size="medium" className="mb-2">About me</Title>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
+      sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus
+      dolor purus non enim praesent elementum facilisis leo, vel fringilla est
+      ullamcorper eget nulla facilisi etiam.
+    </p>
+
+    <Title variant="h3" size="medium" className="mb-2 mt-8">Experience</Title>
+    <p class="mb-4">
+      Orci sagittis eu volutpat odio facilisis mauris amet massa vitae tortor
+      condimentum lacinia quis vel eros donec ac odio tempor orci dapibus
+      ultrices.
+    </p>
+    <ul class="flex flex-col gap-y-2" role="list">
+      <li>
+        . Lorem ipsum dolor sit amet consectetur facilisi etiam dignissim.
+      </li>
+      <li>. Mauris aliquet faucibus iaculis dui vitae ullamco sit.</li>
+      <li>. Posuere enim mi pharetra neque proin dic rhoncus dolor purus.</li>
+      <li>. Dui faucibus in ornare posuere enim mi pharetra neque.</li>
+    </ul>
+  </Card>
   <Card className="w-full min-h-4 flex flex-col h-fit">
-    <h2 class="font-bold text-font-title text-lg mb-1">
-      Follow me on social media
-    </h2>
+    <Title variant="h2" className="mb-1">Follow me on social media</Title>
+
     <p>Lorem ipsum dolor sit amet lorem id.</p>
     <div class="mt-4 flex gap-x-3">
       <SocialLink type="instagram" />
@@ -28,3 +64,28 @@ import SocialLink from "@/components/SocialLink.astro";
     </div>
   </Card>
 </main>
+
+<script is:inline>
+  function script() {
+    const emailLink = document.getElementById("emailLink");
+    console.log(emailLink);
+    if (!emailLink) return;
+
+    const arrow = emailLink.querySelector("#arrow");
+
+    emailLink.addEventListener("mouseenter", mouseEnterHandler);
+    emailLink.addEventListener("mouseleave", mouseLeaveHandler);
+
+    function mouseEnterHandler() {
+      arrow.style.marginLeft = "2px";
+      arrow.style.marginBottom = "2px";
+    }
+
+    function mouseLeaveHandler() {
+      arrow.style.marginLeft = "0";
+      arrow.style.marginBottom = "0";
+    }
+  }
+
+  script();
+</script>

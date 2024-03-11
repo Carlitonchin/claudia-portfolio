@@ -21,7 +21,9 @@ const { title } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="flex flex-col items-center bg-background font-normal">
+  <body
+    class="flex flex-col items-center bg-background text-font-normal font-semibold"
+  >
     <div class="w-full max-w-5xl px-4 md:px-8 xl:px-0">
       <Navbar />
       <div aria-hidden class="w-8 h-4"></div>
