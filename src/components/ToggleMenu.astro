@@ -1,0 +1,25 @@
+---
+interface Props {
+  groupName: string;
+}
+const { groupName } = Astro.props;
+---
+
+<div
+  data-group={groupName}
+  id={groupName}
+  class="w-10 h-full flex flex-col gap-y-3 justify-center cursor-pointer z-30"
+>
+  <div
+    data-group={groupName}
+    id="bar1"
+    class="w-full h-1 bg-font-title rounded-lg duration-500 z-30"
+  >
+  </div>
+  <div
+    data-group={groupName}
+    id="bar2"
+    class="w-full h-1 bg-font-title rounded-lg duration-500 z-30"
+  >
+  </div>
+</div>

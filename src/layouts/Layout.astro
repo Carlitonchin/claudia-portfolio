@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "@/components/Navbar.astro";
+import Navbar from "@/components/navbar/index.astro";
 
 interface Props {
   title: string;
@@ -24,9 +24,10 @@ const { title } = Astro.props;
   <body
     class="flex flex-col items-center bg-background text-font-normal font-semibold"
   >
+    <Navbar />
+    <div class="h-20 w-full"></div>
+    <div aria-hidden class="w-8 h-4"></div>
     <div class="w-full max-w-5xl px-4 md:px-8 xl:px-0">
-      <Navbar />
-      <div aria-hidden class="w-8 h-4"></div>
       <slot />
     </div>
 
