@@ -1,12 +1,14 @@
 ---
 interface Props {
   className?: string;
+  props?: object;
 }
 
-const { className } = Astro.props;
+const { className, props } = Astro.props;
 ---
 
 <div
+  {...props}
   class={"w-full bg-white shadow-lg rounded-lg p-8 border-2 border-neutral-200/50 " +
     className}
 >
