@@ -1,0 +1,113 @@
+<script is:inline>
+  var firstAnimation = false;
+  var alreadyAnimated = [];
+  const scrollElements = document.querySelectorAll(".js-scroll");
+  const fadeinElements = document.querySelectorAll(".animate-fade-in");
+  if (fadeinElements) {
+    for (let elem of fadeinElements) {
+      elem.classList.toggle("show-fadein");
+    }
+  }
+  if (scrollElements) {
+    for (let elem of scrollElements) {
+      !elem.classList.contains("invisible") && elem.classList.add("invisible");
+    }
+  }
+
+  const elementInView = (el, dividend = 1) => {
+    const elementTop = el.getBoundingClientRect().top;
+    const elem = elementTop + window.scrollY + Math.min(el.clientHeight, 100);
+    const pc = window.scrollY + window.innerHeight;
+
+    return pc >= elem;
+  };
+
+  const elementOutofView = (el) => {
+    const elementTop = el.getBoundingClientRect().top;
+
+    return (
+      elementTop > (window.innerHeight || document.documentElement.clientHeight)
+    );
+  };
+
+  const displayScrollElement = (element, withDelay) => {
+    if (!element) return;
+    let delay = 1;
+    if (withDelay && document.documentElement.clientWidth > 700) {
+      delay = Number(element.dataset?.delayanimation) || 1;
+    }
+    if (
+      !element.classList?.contains("invisible") ||
+      alreadyAnimated.includes(element)
+    ) {
+      return;
+    }
+
+    alreadyAnimated.push(element);
+    setTimeout(() => {
+      element.classList.toggle("invisible");
+      element.classList.toggle("show-rotate");
+    }, delay);
+  };
+
+  const handleScrollAnimation = (withDelay) => {
+    firstAnimation = true;
+    scrollElements.forEach((el) => {
+      if (elementInView(el, 1)) {
+        displayScrollElement(el, withDelay);
+      }
+    });
+  };
+
+  window.addEventListener("scroll", () => {
+    handleScrollAnimation(true);
+  });
+
+  window.addEventListener("resize", () => handleScrollAnimation(true));
+
+  setTimeout(() => {
+    !firstAnimation && handleScrollAnimation(true);
+  }, 100);
+</script>
+
+<style is:global>
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      opacity: 0;
+      scale: 0.9;
+      transform: rotate(5deg);
+    }
+
+    50% {
+      opacity: 1;
+      scale: 1.05;
+      transform: rotate(-1deg);
+    }
+
+    100% {
+      scale: 1;
+      transform: rotate(0deg);
+    }
+  }
+  .invisible {
+    opacity: 0;
+  }
+
+  .show-rotate {
+    animation: rotate 400ms ease-in-out;
+  }
+
+  .show-fadein {
+    animation: fadein 500ms;
+  }
+</style>
