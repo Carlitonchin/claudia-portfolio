@@ -42,7 +42,8 @@ const { title } = Astro.props;
       }
       const elementInView = (el, dividend = 1) => {
         const elementTop = el.getBoundingClientRect().top;
-        const elem = elementTop + window.scrollY + el.clientHeight;
+        const elem =
+          elementTop + window.scrollY + Math.min(el.clientHeight, 100);
         const pc = window.scrollY + window.innerHeight;
 
         return pc >= elem;
@@ -60,7 +61,7 @@ const { title } = Astro.props;
       const displayScrollElement = (element, withDelay) => {
         if (!element) return;
         let delay = 1;
-        if (withDelay) {
+        if (withDelay && document.documentElement.clientWidth > 700) {
           delay = Number(element.dataset?.delayanimation) || 1;
         }
         if (
@@ -89,6 +90,8 @@ const { title } = Astro.props;
       window.addEventListener("scroll", () => {
         handleScrollAnimation(true);
       });
+
+      window.addEventListener("resize", () => handleScrollAnimation(true));
 
       setTimeout(() => {
         !firstAnimation && handleScrollAnimation(true);
