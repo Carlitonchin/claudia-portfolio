@@ -1,9 +1,22 @@
 ---
 import NavbarMobile from "./NavbarMobile.astro";
 import NavbarPc from "./NavbarPc.astro";
+import { type Menu } from "@/data/menu.ts";
+
+const options: Menu[] = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "About",
+    href: "#about",
+  },
+  { name: "Blog", href: "/blog" },
+];
 ---
 
-<NavbarMobile />
+<NavbarMobile options={options} transition:persist />
 
 <div
   class="[width:calc(100%_-_2rem)] md:[width:calc(100%_-_4rem)] max-w-5xl h-fit absolute top-0 left-1/8 bg-red-500 hidden lg:block"
