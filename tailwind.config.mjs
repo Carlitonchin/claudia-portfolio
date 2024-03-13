@@ -7,7 +7,7 @@ export default {
         background: "#f6f7fa",
         "font-normal": "#616178",
         "font-title": "#1c1c2c",
-        primary: "#3aa0ff",
+        primary: "#FF3CC7",
       },
     },
   },

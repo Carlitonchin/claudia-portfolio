@@ -36,7 +36,7 @@
     const displayScrollElement = (element, withDelay) => {
       if (!element) return;
       let delay = 100;
-      if (withDelay && document.documentElement.clientWidth > 700) {
+      if (withDelay && document.documentElement.clientWidth > 1023) {
         delay = Number(element.dataset?.delayanimation) || 100;
       }
       if (

@@ -16,7 +16,7 @@ const { options } = Astro.props;
   <div class="flex gap-x-10">
     {
       options.map((option) => (
-        <a class="hover:text-primary duration-200" href={option.href}>
+        <a class="hover:text-primary font-bold duration-200" href={option.href}>
           {option.name}
         </a>
       ))
