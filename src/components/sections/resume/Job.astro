@@ -1,0 +1,31 @@
+---
+import { type Job } from "@/data/job";
+import Title from "@/components/Title.astro";
+
+interface Props {
+  job: Job;
+}
+
+const { job } = Astro.props;
+---
+
+<a href={job.href} target="_blank">
+  <div
+    class="flex py-10 flex-col gap-y-5 [&>div>div>div>.title]:text-font-title [&>div>div>div>.title]:hover:text-primary [&>div>div>img]:hover:scale-110"
+  >
+    <div class="flex w-full justify-between">
+      <div class="flex gap-x-4 items-center">
+        <img alt={job.alt} src={job.img} class="w-8 h-8 duration-200" />
+        <div class="flex flex-col">
+          <span class="duration-200 text-xl font-bold title">
+            {job.title}
+          </span>
+          <span class="font-bold">{job.company}</span>
+        </div>
+      </div>
+      <span class="font-semibold">{job.timestamp}</span>
+    </div>
+
+    <span>{job.description}</span>
+  </div>
+</a>

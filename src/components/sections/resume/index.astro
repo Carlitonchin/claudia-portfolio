@@ -1,0 +1,22 @@
+---
+import Card from "@/components/Card.astro";
+import Title from "@/components/Title.astro";
+import JobsList from "./JobsList.astro";
+---
+
+<section
+  class="w-full h-fit gap-4 grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2"
+>
+  <Card className="h-fit lg:col-span-2 lg:row-span-2 js-scroll">
+    <Title variant="span" size="medium">My resume</Title>
+    <p class="mt-2 mb-8">Lorem ipsum dolor sit amet lorem id.</p>
+
+    <JobsList />
+  </Card>
+
+  <Card
+    props={{ "data-delayanimation": "300" }}
+    className="h-full w-full js-scroll"
+  />
+  <Card className="h-full w-full js-scroll" />
+</section>
