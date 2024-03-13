@@ -1,6 +1,5 @@
 ---
 import { type Job } from "@/data/job";
-import Title from "@/components/Title.astro";
 
 interface Props {
   job: Job;
@@ -25,7 +24,6 @@ const { job } = Astro.props;
       </div>
       <span class="font-semibold">{job.timestamp}</span>
     </div>
-
-    <span>{job.description}</span>
+    {job.description && <span>{job.description}</span>}
   </div>
 </a>
