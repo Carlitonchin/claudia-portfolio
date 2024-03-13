@@ -35,9 +35,9 @@
 
     const displayScrollElement = (element, withDelay) => {
       if (!element) return;
-      let delay = 1;
+      let delay = 100;
       if (withDelay && document.documentElement.clientWidth > 700) {
-        delay = Number(element.dataset?.delayanimation) || 1;
+        delay = Number(element.dataset?.delayanimation) || 100;
       }
       if (
         !element.classList?.contains("invisible") ||
@@ -77,6 +77,8 @@
     (firstAnimation = false), (alreadyAnimated = []);
     action();
   });
+
+  action();
 </script>
 
 <style is:global>

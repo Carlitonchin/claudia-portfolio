@@ -1,4 +1,25 @@
-<nav class="w-full h-20 p-4 flex gap-x-8 relative">
-  <span>Logo</span>
-  <span>link</span>
+---
+import Logo from "@/components/Logo.astro";
+import type { Menu } from "@/data/menu";
+
+interface Props {
+  options: Menu[];
+}
+
+const { options } = Astro.props;
+---
+
+<nav
+  class="animate-fade-in w-full h-20 py-4 flex items-center justify-between relative"
+>
+  <Logo className="duration-200 hover:scale-95 cursor-pointer" />
+  <div class="flex gap-x-10">
+    {
+      options.map((option) => (
+        <a class="hover:text-primary duration-200" href={option.href}>
+          {option.name}
+        </a>
+      ))
+    }
+  </div>
 </nav>
