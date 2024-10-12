@@ -5,6 +5,7 @@ import Title from "@/components/Title.astro";
 import EmailIcon from "@/components/icons/Email.astro";
 import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
 import { getAboutData } from "@/api/about";
+import {convertLexicalToHTML} from "@/utils/lexical";
 
 const { about, alt, email, experience, image, job, name } =
   await getAboutData();
@@ -56,13 +57,11 @@ const { about, alt, email, experience, image, job, name } =
     className="w-full min-h-4 md:row-span-2 lg:col-span-2 flex flex-col justify-center order-3 lg:order-2 js-scroll"
   >
     <Title variant="h2" size="medium" className="mb-2">Sobre mim</Title>
-    <p>
-      {about}
+    <p set:html={convertLexicalToHTML(about.root)}>
     </p>
 
     <Title variant="h3" size="medium" className="mb-2 mt-8">Experiência</Title>
-    <p class="mb-4">
-      {experience}
+    <p class="mb-4" set:html={convertLexicalToHTML(experience.root)}>
     </p>
   </Card>
 </main>
