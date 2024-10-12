@@ -4,6 +4,10 @@ import SocialLink from "@/components/SocialLink.astro";
 import Title from "@/components/Title.astro";
 import EmailIcon from "@/components/icons/Email.astro";
 import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
+import { getAboutData } from "@/api/about";
+
+const { about, alt, email, experience, image, job, name } =
+  await getAboutData();
 ---
 
 <main class="grid grid-cols-1 lg:grid-cols-3 w-full h-fit gap-4">
@@ -12,13 +16,13 @@ import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
     className="flex flex-col gap-y-4 order-1 js-scroll"
   >
     <img
-      alt="Claudia Marin profile picture"
+      alt={alt}
       class="w-20 h-20 rounded-full"
-      src="/img/profile.png"
+      src={image}
     />
-    <Title variant="h1" size="large">Claudia Marin</Title>
+    <Title variant="h1" size="large">{name}</Title>
     <p>
-      Lorem ipsum dolor sit amet lorem id consectetur neque congue tristique.
+      {job}
     </p>
     <Title
       props={{ id: "emailLink" }}
@@ -28,7 +32,7 @@ import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
     >
       <span class="text-orange-600 mr-2">
         <EmailIcon />
-      </span> claudia@gmail.com
+      </span> {email}
       <span class="duration-100" id="arrow">
         <ArrowUpRightIcon />
       </span>
@@ -51,28 +55,15 @@ import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
     props={{ "data-delayanimation": "500" }}
     className="w-full min-h-4 md:row-span-2 lg:col-span-2 flex flex-col justify-center order-3 lg:order-2 js-scroll"
   >
-    <Title variant="h2" size="medium" className="mb-2">About me</Title>
+    <Title variant="h2" size="medium" className="mb-2">Sobre mim</Title>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
-      sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus
-      dolor purus non enim praesent elementum facilisis leo, vel fringilla est
-      ullamcorper eget nulla facilisi etiam.
+      {about}
     </p>
 
-    <Title variant="h3" size="medium" className="mb-2 mt-8">Experience</Title>
+    <Title variant="h3" size="medium" className="mb-2 mt-8">Experiência</Title>
     <p class="mb-4">
-      Orci sagittis eu volutpat odio facilisis mauris amet massa vitae tortor
-      condimentum lacinia quis vel eros donec ac odio tempor orci dapibus
-      ultrices.
+      {experience}
     </p>
-    <ul class="flex flex-col gap-y-2" role="list">
-      <li>
-        . Lorem ipsum dolor sit amet consectetur facilisi etiam dignissim.
-      </li>
-      <li>. Mauris aliquet faucibus iaculis dui vitae ullamco sit.</li>
-      <li>. Posuere enim mi pharetra neque proin dic rhoncus dolor purus.</li>
-      <li>. Dui faucibus in ornare posuere enim mi pharetra neque.</li>
-    </ul>
   </Card>
 </main>
 
