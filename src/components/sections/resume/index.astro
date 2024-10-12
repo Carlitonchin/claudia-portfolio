@@ -6,22 +6,21 @@ import Instagram from "@/components/icons/Instagram.astro";
 import EducationList from "./EducationList.astro";
 ---
 
-<section
-  class="w-full h-fit gap-4 grid grid-cols-1"
->
+<section class="w-full h-fit gap-4 grid grid-cols-1">
   <Card
-    className="h-full flex flex-col justify-center md:col-span-2 lg:row-span-2 js-scroll order-1"
+    className="h-full flex flex-col justify-center md:col-span-2 lg:row-span-2 js-scroll"
   >
     <Title variant="span" size="medium">My resume</Title>
     <p class="mt-2 mb-4">Lorem ipsum dolor sit amet lorem id.</p>
 
     <JobsList />
   </Card>
+</section>
 
+<section class="mt-4 w-full h-fit gap-4 flex flex-col md:flex-row mb-4">
   <a
     id="socialPicture"
-    data-delayanimation="300"
-    class="relative [&>div]:hover:opacity-100 w-full h-full aspect-square order-3 lg:order-2 shadow-lg rounded-xl overflow-hidden js-scroll"
+    class="relative [&>div]:hover:opacity-100 w-full h-full aspect-square shadow-lg rounded-xl overflow-hidden js-scroll"
     href="https://google.com"
     target="_blank"
   >
@@ -50,7 +49,9 @@ import EducationList from "./EducationList.astro";
       src="/img/laformula.jpeg"
     />
   </a>
-  <Card className=" w-full js-scroll flex flex-col justify-center order-2"
+  <Card
+    props={{ "data-delayanimation": "300" }}
+    className=" w-full js-scroll flex flex-col justify-center order-2"
     ><Title variant="span" size="medium">My education</Title>
     <p class="mb-2 mt-2"></p>
     <EducationList /></Card

@@ -1,16 +1,18 @@
 ---
 import { type Job } from "@/api/works";
-import Card from "@/components/Card.astro";
 import Title from "@/components/Title.astro";
 
 interface Props {
   job: Job;
+  index: number;
 }
 
-const { job } = Astro.props;
+const { job, index } = Astro.props;
 ---
 
-<a class="hover:scale-95 duration-500" href=`/jobs/${job.slug}`>
+<a  
+data-delayanimation={index * 100 + 100}
+class="hover:scale-95 duration-500 js-scroll" href=`/jobs/${job.slug}`>
   <div
     style="aspect-ratio: 0.8;"
     class="flex flex-col overflow-hidden w-full sm:max-w-[400px] shadow-lg rounded-2xl border-2 border-neutral-200/50"
