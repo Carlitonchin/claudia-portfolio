@@ -5,6 +5,6 @@ import { getJobs } from "@/api/works";
 var jobs = await getJobs();
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full h-fit gap-6 md:gap-10">
   {jobs.map((job) => <JobComponent job={job} />)}
 </div>

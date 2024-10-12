@@ -1,6 +1,7 @@
 ---
 import { type Job } from "@/api/works";
 import Card from "@/components/Card.astro";
+import Title from "@/components/Title.astro";
 
 interface Props {
   job: Job;
@@ -8,7 +9,21 @@ interface Props {
 
 const { job } = Astro.props;
 ---
-<div class="aspect-square w-full sm:max-w-[300px] shadow-lg rounded-xl border-2 border-neutral-200/50 ">
-  <img class="w-full h-full object-cover" src={job.image} alt={job.alt} />
-</div>
 
+<a class="hover:scale-95 duration-500" href=`/jobs/${job.slug}`>
+  <div
+    style="aspect-ratio: 0.8;"
+    class="flex flex-col overflow-hidden w-full sm:max-w-[400px] shadow-lg rounded-2xl border-2 border-neutral-200/50"
+  >
+    <img
+      class="w-full h-4/5 object-cover"
+      src={job.image}
+      alt={job.alt}
+    />
+    <Title
+      className="w-full h-1/5 flex items-center justify-center text-center"
+      size="medium"
+      >{job.name}</Title
+    >
+  </div>
+</a>

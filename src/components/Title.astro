@@ -6,16 +6,18 @@ interface Props {
   href?: string;
   size?: "large" | "medium" | "normal";
   props?: object;
+  textTitleColor?: boolean;
 }
 
-const { variant, className, href, size, props } = Astro.props;
+const { variant, className, href, size,textTitleColor, props } = Astro.props;
+const withTitleColor = textTitleColor === true || textTitleColor === undefined;
 ---
 
 {
   variant == "h1" && (
     <h1
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h1>
@@ -25,7 +27,7 @@ const { variant, className, href, size, props } = Astro.props;
   variant == "h2" && (
     <h2
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h2>
@@ -35,7 +37,7 @@ const { variant, className, href, size, props } = Astro.props;
   variant == "h3" && (
     <h3
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h3>
@@ -45,7 +47,7 @@ const { variant, className, href, size, props } = Astro.props;
   variant == "h4" && (
     <h4
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h4>
@@ -55,7 +57,7 @@ const { variant, className, href, size, props } = Astro.props;
   variant == "h5" && (
     <h5
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h5>
@@ -65,7 +67,7 @@ const { variant, className, href, size, props } = Astro.props;
   variant == "h6" && (
     <h6
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </h6>
@@ -76,7 +78,7 @@ const { variant, className, href, size, props } = Astro.props;
     <a
       {...props}
       href={href ?? "#"}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </a>
@@ -86,7 +88,7 @@ const { variant, className, href, size, props } = Astro.props;
   (variant == "span" || variant == undefined) && (
     <span
       {...props}
-      class={`text-font-title font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
+      class={`${withTitleColor && "text-font-title"} font-bold ${size == "large" && "text-2xl"} ${size == "medium" && "text-xl"} ${className}`}
     >
       <slot />
     </span>
