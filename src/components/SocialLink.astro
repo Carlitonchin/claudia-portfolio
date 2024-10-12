@@ -2,37 +2,44 @@
 import Instagram from "@/components/icons/Instagram.astro";
 import Facebook from "@/components/icons/Facebook.astro";
 import Twitter from "@/components/icons/Twitter.astro";
-import { getSocialUrl } from "@/data/social.ts";
-import { type socialType } from "@/data/social";
+import Linkedin from "./icons/Linkedin.astro";
+import Email from "./icons/Email.astro";
+
+type socialType = "instagram" | "facebook" | "twitter" | "linkedin" | "email";
 
 interface Props {
   type: socialType;
+  href: string;
 }
 
-const { type } = Astro.props;
+const { type, href } = Astro.props;
 
 const getSocialBackground = () => {
   switch (type) {
     case "instagram":
       return "bg-pink-500/15";
     case "facebook":
+    case "linkedin":
       return "bg-blue-500/15";
     case "twitter":
       return "bg-cyan-400/15";
+    case "email":
+      return "bg-orange-500/15";
     default:
       return "bg-neutral-300/15";
   }
 };
 ---
 
-<a href={getSocialUrl(type)}>
+<a href={href}>
   <div
-    aria-label={`Go to Claudia marin ${type} account`}
     class={"hover:scale-105 p-2 duration-150 rounded-full w-fit h-fit " +
       getSocialBackground()}
   >
     {type == "instagram" && <Instagram />}
     {type == "facebook" && <Facebook />}
     {type == "twitter" && <Twitter />}
+    {type == "linkedin" && <Linkedin/>}
+    {type == "email" && <Email/>}
   </div>
 </a>

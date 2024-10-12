@@ -5,10 +5,13 @@ import Title from "@/components/Title.astro";
 import EmailIcon from "@/components/icons/Email.astro";
 import ArrowUpRightIcon from "@/components/icons/ArrowUpRight.astro";
 import { getAboutData } from "@/api/about";
-import {convertLexicalToHTML} from "@/utils/lexical";
+import { convertLexicalToHTML } from "@/utils/lexical";
+import { getSocialMediaData } from "@/api/socialmedia";
 
 const { about, alt, email, experience, image, job, name } =
   await getAboutData();
+
+const socialMediaData = await getSocialMediaData();
 ---
 
 <main class="grid grid-cols-1 lg:grid-cols-3 w-full h-fit gap-4">
@@ -16,13 +19,9 @@ const { about, alt, email, experience, image, job, name } =
     props={{ "data-delayanimation": "100" }}
     className="flex flex-col gap-y-4 order-1 js-scroll"
   >
-    <img
-      alt={alt}
-      class="w-20 h-20 rounded-full"
-      src={image}
-    />
+    <img alt={alt} class="w-20 h-20 rounded-full" src={image} />
     <Title variant="h1" size="large">{name}</Title>
-    <p>
+    <p class="-mt-4">
       {job}
     </p>
     <Title
@@ -33,7 +32,8 @@ const { about, alt, email, experience, image, job, name } =
     >
       <span class="text-orange-600 mr-2">
         <EmailIcon />
-      </span> {email}
+      </span>
+      {email}
       <span class="duration-100" id="arrow">
         <ArrowUpRightIcon />
       </span>
@@ -43,13 +43,31 @@ const { about, alt, email, experience, image, job, name } =
     props={{ "data-delayanimation": "300" }}
     className="w-full min-h-4 flex flex-col justify-end h-fit order-2 lg:order-3 md:h-full js-scroll"
   >
-    <Title variant="h2" className="mb-1">Follow me on social media</Title>
+    <Title variant="h2" className="mb-1">{socialMediaData.title}</Title>
 
-    <p>Lorem ipsum dolor sit amet lorem id.</p>
+    <p>{socialMediaData.description}</p>
     <div class="mt-4 flex gap-x-3">
-      <SocialLink type="instagram" />
-      <SocialLink type="facebook" />
-      <SocialLink type="twitter" />
+      {
+        socialMediaData.instagram && (
+          <SocialLink type="instagram" href={socialMediaData.instagram} />
+        )
+      }
+      {
+        socialMediaData.facebook && (
+          <SocialLink type="facebook" href={socialMediaData.facebook} />
+        )
+      }
+      {
+        socialMediaData.twitter && (
+          <SocialLink type="twitter" href={socialMediaData.twitter} />
+        )
+      }
+      {
+        socialMediaData.linkedin && (
+          <SocialLink type="linkedin" href={socialMediaData.linkedin} />
+        )
+      }
+      <SocialLink type="email" href={`mailto:${email}`} />
     </div>
   </Card>
   <Card
@@ -57,12 +75,10 @@ const { about, alt, email, experience, image, job, name } =
     className="w-full min-h-4 md:row-span-2 lg:col-span-2 flex flex-col justify-center order-3 lg:order-2 js-scroll"
   >
     <Title variant="h2" size="medium" className="mb-2">Sobre mim</Title>
-    <p set:html={convertLexicalToHTML(about.root)}>
-    </p>
+    <p set:html={convertLexicalToHTML(about.root)} />
 
     <Title variant="h3" size="medium" className="mb-2 mt-8">Experiência</Title>
-    <p class="mb-4" set:html={convertLexicalToHTML(experience.root)}>
-    </p>
+    <p class="mb-4" set:html={convertLexicalToHTML(experience.root)} />
   </Card>
 </main>
 
