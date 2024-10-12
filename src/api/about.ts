@@ -3,8 +3,8 @@ import { getData } from "./api"
 export interface AboutData {
     name: string
     job: string
-    experience: string
-    about: string
+    experience: any
+    about: any
     email: string
     image: string
     alt: string
