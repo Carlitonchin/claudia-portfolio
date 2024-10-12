@@ -1,47 +1,10 @@
 ---
-import { type Job } from "@/data/job.ts";
 import JobComponent from "./Job.astro";
-import Divider from "@/components/Divider.astro";
+import { getJobs } from "@/api/works";
 
-const jobs: Job[] = [
-  {
-    alt: "Google logo",
-    company: "Google",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus.",
-    href: "google.com",
-    img: "/img/Google.svg",
-    title: "Brand Designer",
-    timestamp: "2025 - Present",
-  },
-  {
-    alt: "Facebook logo",
-    company: "Facebook",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus.",
-    href: "google.com",
-    img: "/img/Facebook.svg",
-    title: "Fullstack Developer",
-    timestamp: "2023 - 2025",
-  },
-  {
-    alt: "Twitter Logo",
-    company: "Twitter",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus.",
-    href: "google.com",
-    img: "/img/Twitter.svg",
-    title: "CEO",
-    timestamp: "2020 - 2023",
-  },
-];
+var jobs = await getJobs();
 ---
 
-{
-  jobs.map((job) => (
-    <>
-      <Divider />
-      <JobComponent job={job} />
-    </>
-  ))
-}
+<div class="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-4">
+  {jobs.map((job) => <JobComponent job={job} />)}
+</div>
