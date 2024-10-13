@@ -4,54 +4,62 @@ import Title from "@/components/Title.astro";
 import JobsList from "./JobsList.astro";
 import Instagram from "@/components/icons/Instagram.astro";
 import SkillsList from "./SkillsList.astro";
+import { getJobsHeader } from "@/api/works";
+import { getCallToActionImage } from "@/api/callToActionImage";
+
+const { title, subtitle } = await getJobsHeader();
+const { externalLink, hoverIcon, hoverText, icon, image, link } =
+  await getCallToActionImage();
 ---
 
 <section class="w-full h-fit gap-4 grid grid-cols-1">
   <Card
     className="h-full flex flex-col justify-center md:col-span-2 lg:row-span-2 js-scroll"
   >
-    <Title variant="span" size="medium">My resume</Title>
-    <p class="mt-2 mb-4">Lorem ipsum dolor sit amet lorem id.</p>
+    <Title variant="span" size="medium">{title}</Title>
+    <p class="mt-2 mb-4">{subtitle}</p>
 
     <JobsList />
   </Card>
 </section>
 
 <section class="mt-4 w-full h-fit gap-4 flex flex-col md:flex-row mb-4">
-  <a
-    id="socialPicture"
-    class="relative [&>div]:hover:opacity-100 w-full h-full aspect-square shadow-lg rounded-xl overflow-hidden js-scroll"
-    href="https://google.com"
-    target="_blank"
-  >
-    <span
-      class="absolute top-4 right-4 md:top-8 md:right-8 bg-white p-4 rounded-full"
-      ><Instagram width="40" height="40" /></span
+  <div class="w-full js-scroll flex flex-col justify-center">
+    <a
+      id="socialPicture"
+      class="relative [&>div]:hover:opacity-100 aspect-square md:aspect-auto w-full h-full shadow-lg rounded-xl overflow-hidden"
+      href={link}
+      target={externalLink ? "_blank" : undefined}
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-    <div
-      class="absolute w-full h-full bg-black/50 opacity-0 duration-300 flex flex-col items-center justify-center"
-    >
-      <img
-        alt="logo de instagram en blanco"
-        src="/img/icons8-instagram.svg"
-        class="w-20 h-20 mb-2"
-      />
-      <Title
-        variant="span"
-        size="medium"
-        className="text-white max-w-32 text-center"
-        >Follow me on instagram</Title
+      <span
+        class="absolute top-4 right-4 md:top-8 md:right-8 bg-white p-4 rounded-full"
+        ><img src={icon} width="40" height="40" alt="logo de instagram" /></span
       >
-    </div>
-    <img
-      alt="Claudia Marin instagram image"
-      class="w-full h-full"
-      src="/img/laformula.jpeg"
-    />
-  </a>
+      <div
+        class="absolute w-full h-full bg-black/50 opacity-0 duration-300 flex flex-col items-center justify-center"
+      >
+        <img
+          alt="logo de instagram en blanco"
+          src={hoverIcon}
+          class="w-20 h-20 mb-2"
+        />
+        <Title
+          variant="span"
+          size="medium"
+          className="text-white max-w-32 text-center"
+          >{hoverText}</Title
+        >
+      </div>
+    </a>
+  </div>
   <Card
     props={{ "data-delayanimation": "300" }}
-    className=" w-full js-scroll flex flex-col justify-center order-2"
+    className=" w-full js-scroll flex flex-col justify-center"
     ><Title variant="span" size="medium">Aptidões</Title>
     <p class="mb-2 mt-2"></p>
     <SkillsList /></Card
