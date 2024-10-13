@@ -1,0 +1,16 @@
+---
+import { getJobs } from "@/api/works";
+const jobs = await getJobs();
+export async function getStaticPaths() {
+    const jobs = await getJobs();
+  return jobs.map((job) => {
+    return { params: { slug: job.slug } };
+  });
+}
+
+const { slug } = Astro.params;
+const job = jobs.find((job)=>job.slug == slug)!;
+---
+
+<h1>Post: {slug}</h1>
+<img src={job.image}/>

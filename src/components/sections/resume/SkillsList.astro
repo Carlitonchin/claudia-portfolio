@@ -1,0 +1,16 @@
+---
+import Divider from "@/components/Divider.astro";
+import { getSkills } from "@/api/skills";
+import Skill from "./Skill.astro";
+
+const skills = await getSkills();
+---
+
+{
+  skills.map((skill, index) => (
+    <>
+      {index > 0 && <Divider />}
+      <Skill skill={skill} />
+    </>
+  ))
+}
