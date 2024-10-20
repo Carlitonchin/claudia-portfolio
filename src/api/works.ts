@@ -36,19 +36,33 @@ export const getJobs = async (): Promise<Job[]> => {
         {
   listWorks{
     data{
-      url,secondaryDescription,
-      secondaryTitle,principalDescription,
-      mainTitle,altMainImage,mainImage,altLogo,
-      logo,slug,alt,image,name,order
-      gallery{
-          height,width,alt,image,tinyImage
-      }
+      slug,image,alt,name,order
     }
   }
 }
     `)
 
     return response.listWorks.data
+}
+
+export const getJobBySlug = async (slug: string): Promise<Job> => {
+  const response = await getData(`
+      {
+getWork(where: {slug: "${slug}"}){
+  data{
+    url,secondaryDescription,
+    secondaryTitle,principalDescription,
+    mainTitle,altMainImage,mainImage,altLogo,
+    logo,slug,alt,image,name,order
+    gallery{
+        height,width,alt,image,tinyImage
+    }
+  }
+}
+}
+  `)
+
+  return response.getWork.data
 }
 
 export const getJobsHeader = async (): Promise<JobsHeader> => {

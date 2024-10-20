@@ -1,5 +1,5 @@
 ---
-import { getJobs } from "@/api/works";
+import { getJobBySlug, getJobs } from "@/api/works";
 import Button from "@/components/Button.astro";
 import Card from "@/components/Card.astro";
 import Gallery from "@/components/Gallery.astro";
@@ -7,7 +7,6 @@ import Title from "@/components/Title.astro";
 import Layout from "@/layouts/Layout.astro";
 import "photoswipe/style.css";
 
-const jobs = await getJobs();
 export async function getStaticPaths() {
   const jobs = await getJobs();
   return jobs.map((job) => {
@@ -16,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const job = jobs.find((job) => job.slug == slug)!;
+const job = await getJobBySlug(slug);
 ---
 
 <Layout title={"Claudia Marin | " + job.name}>
