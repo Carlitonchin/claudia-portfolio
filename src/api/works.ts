@@ -5,7 +5,7 @@ export interface Job {
     image: string
     slug: string
     alt: string
-    gallery: string[]
+    gallery: JobGallery[]
     url: string
     secondaryDescription: string
     secondaryTitle: string
@@ -22,15 +22,26 @@ export interface JobsHeader{
     subtitle: string;
 }
 
+export interface JobGallery {
+  height: number;
+  width: number;
+  alt: string;
+  image: string;
+  tinyImage: string;
+}
+
 export const getJobs = async (): Promise<Job[]> => {
     const response = await getData(`
         {
   listWorks{
     data{
-      gallery,url,secondaryDescription,
+      url,secondaryDescription,
       secondaryTitle,principalDescription,
       mainTitle,altMainImage,mainImage,altLogo,
-      logo,slug,alt,image,name
+      logo,slug,alt,image,name,
+      gallery{
+          height,width,alt,image,tinyImage
+      }
     }
   }
 }
