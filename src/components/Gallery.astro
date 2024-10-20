@@ -73,7 +73,7 @@ const { job } = Astro.props as Props;
             target="_blank"
             data-pswp-width={image.width}
             data-pswp-height={image.height}
-          ></a>
+          />
         ))
       }
     </div>
@@ -158,22 +158,23 @@ const { job } = Astro.props as Props;
 
 <script>
   import PhotoSwipeLightbox from "photoswipe/lightbox";
+  document.addEventListener("astro:page-load", () => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "#gallery",
+      children: "a",
+      pswpModule: () => import("photoswipe"),
+    });
+    lightbox.init();
 
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: "#gallery",
-    children: "a",
-    pswpModule: () => import("photoswipe"),
-  });
-  lightbox.init();
+    document.querySelectorAll(".gallery-image").forEach((image) => {
+      image.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const imageIndex = target.getAttribute("data-image-index");
+        const lightboxElem = document.getElementById(`image-${imageIndex}`);
+        if (!lightboxElem) return;
 
-  document.querySelectorAll(".gallery-image").forEach((image) => {
-    image.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement;
-      const imageIndex = target.getAttribute("data-image-index");
-      const lightboxElem = document.getElementById(`image-${imageIndex}`);
-      if (!lightboxElem) return;
-
-      lightboxElem.click();
+        lightboxElem.click();
+      });
     });
   });
 </script>

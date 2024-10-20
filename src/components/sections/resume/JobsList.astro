@@ -3,6 +3,7 @@ import JobComponent from "./Job.astro";
 import { getJobs } from "@/api/works";
 
 var jobs = await getJobs();
+jobs = jobs.sort((a, b) => a.order - b.order);
 ---
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full h-fit gap-6 md:gap-10">

@@ -15,6 +15,7 @@ export interface Job {
     mainImage: string
     altLogo: string
     logo: string
+    order: number
 }
 
 export interface JobsHeader{
@@ -38,7 +39,7 @@ export const getJobs = async (): Promise<Job[]> => {
       url,secondaryDescription,
       secondaryTitle,principalDescription,
       mainTitle,altMainImage,mainImage,altLogo,
-      logo,slug,alt,image,name,
+      logo,slug,alt,image,name,order
       gallery{
           height,width,alt,image,tinyImage
       }
