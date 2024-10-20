@@ -4,6 +4,8 @@ import Button from "@/components/Button.astro";
 import Card from "@/components/Card.astro";
 import Title from "@/components/Title.astro";
 import Layout from "@/layouts/Layout.astro";
+import "photoswipe/style.css";
+
 const jobs = await getJobs();
 export async function getStaticPaths() {
   const jobs = await getJobs();
@@ -18,9 +20,12 @@ const job = jobs.find((job) => job.slug == slug)!;
 
 <Layout title={"Claudia Marin | " + job.name}>
   <main class="flex flex-col md:flex-row w-full h-fit gap-4">
-    <Card props={{
-      "data-delayanimation": "100"
-    }} className="js-scroll">
+    <Card
+      props={{
+        "data-delayanimation": "100",
+      }}
+      className="js-scroll"
+    >
       <img
         class="mb-2 rounded-full row-span-2"
         width="40"
@@ -32,60 +37,89 @@ const job = jobs.find((job) => job.slug == slug)!;
       <p class="mt-2">{job.principalDescription}</p>
     </Card>
     <img
-    data-delayanimation="300"
+      data-delayanimation="300"
       src={job.mainImage}
       alt={job.altMainImage}
       class="js-scroll w-full rounded-xl md:max-w-[350px] aspect-square"
     />
   </main>
   <Card
-  props={{
-    "data-delayanimation": "500"
-  }}
+    props={{
+      "data-delayanimation": "500",
+    }}
     className="js-scroll mt-4 mb-4 w-full h-fit md:max-h-[500px] overflow-hidden flex flex-col-reverse md:flex-row md:items-center"
   >
-    <div class="imagesContainer overflow-hidden py-8 md:py-0 md:px-8 w-full h-full max-h-[436px] gap-4 flex flex-col md:flex-row">
+    <div
+      class="imagesContainer overflow-hidden py-8 md:py-0 md:px-8 w-full h-full max-h-[436px] gap-4 flex flex-col md:flex-row"
+    >
       <div class="up w-full h-full flex flex-row md:flex-col gap-4">
-      {
-        job.gallery.map((image) => (
-          <img
-            class="max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
-            src={image}
-            alt={"Galeria de claudia no seu trabalho " + job.name}
-          />
-        )).filter((_, index) => index % 2 == 0)
-      }
-      {
-        job.gallery.map((image) => (
-          <img
-            class="max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
-            src={image}
-            alt={"Galeria de claudia no seu trabalho " + job.name}
-          />
-        )).filter((_, index) => index % 2 == 0)
-      }
+        {
+          job.gallery
+            .map((image, index) => (
+              <img
+                data-image-index={index}
+                class="gallery-image max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
+                src={image}
+                alt={"Galeria de claudia no seu trabalho " + job.name}
+              />
+            ))
+            .filter((_, index) => index % 2 == 0)
+        }
+        {
+          job.gallery
+            .map((image, index) => (
+              <img
+                data-image-index={index}
+                class="gallery-image max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
+                src={image}
+                alt={"Galeria de claudia no seu trabalho " + job.name}
+              />
+            ))
+            .filter((_, index) => index % 2 == 0)
+        }
       </div>
 
       <div class="down w-full h-full flex flex-row md:flex-col gap-4">
         {
-          job.gallery.map((image) => (
-            <img
-              class="max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
-              src={image}
-              alt={"Galeria de claudia no seu trabalho " + job.name}
-            />
-          )).filter((_, index) => index % 2 != 0)
+          job.gallery
+            .map((image, index) => (
+              <img
+                data-image-index={index}
+                class="gallery-image max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
+                src={image}
+                alt={"Galeria de claudia no seu trabalho " + job.name}
+              />
+            ))
+            .filter((_, index) => index % 2 != 0)
         }
         {
-          job.gallery.map((image) => (
-            <img
-              class="max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
-              src={image}
-              alt={"Galeria de claudia no seu trabalho " + job.name}
-            />
-          )).filter((_, index) => index % 2 != 0)
+          job.gallery
+            .map((image, index) => (
+              <img
+                data-image-index={index}
+                class="gallery-image max-w-[200px] rounded-md cursor-pointer hover:scale-105 duration-300"
+                src={image}
+                alt={"Galeria de claudia no seu trabalho " + job.name}
+              />
+            ))
+            .filter((_, index) => index % 2 != 0)
         }
+
+        <div id="gallery" class="h-0 sr-only">
+          {
+            job.gallery.map((image, index) => (
+              <a
+                id={`image-${index}`}
+                href={image}
+                target="_blank"
+                data-pswp-width="1080"
+                data-pswp-height="1080"
+              >
+              </a>
+            ))
+          }
         </div>
+      </div>
     </div>
     <div class="w-full h-fit">
       <Title className="mb-2" variant="h2" size="large">
@@ -95,86 +129,106 @@ const job = jobs.find((job) => job.slug == slug)!;
         {job.secondaryDescription}
       </p>
       <a href={job.url} target="_blank">
-      <Button>
-        Saiba mais
-      </Button>
-    </a>
+        <Button> Saiba mais </Button>
+      </a>
     </div>
   </Card>
 </Layout>
 
 <style>
-.imagesContainer > .up {
-    animation: scrollVerticalRight 10s linear infinite;
-}
-
-.imagesContainer > .up:hover {
-    animation: scrollVerticalRight 10s linear infinite;
-    animation-play-state: paused;
-}
-
-.imagesContainer > .down {
-    animation: scrollVerticalLeft 10s linear infinite;
-}
-
-.imagesContainer > .down:hover {
-    animation: scrollVerticalLeft 10s linear infinite;
-    animation-play-state: paused;
-}
-
-@media (min-width: 768px) {
   .imagesContainer > .up {
-    animation: scrollVerticalUp 10s linear infinite;
-}
+    animation: scrollVerticalRight 10s linear infinite;
+  }
 
-.imagesContainer > .up:hover {
-    animation: scrollVerticalUp 10s linear infinite;
+  .imagesContainer > .up:hover {
+    animation: scrollVerticalRight 10s linear infinite;
     animation-play-state: paused;
-}
+  }
 
-.imagesContainer > .down {
-    animation: scrollVerticalDown 10s linear infinite;
-}
+  .imagesContainer > .down {
+    animation: scrollVerticalLeft 10s linear infinite;
+  }
 
-.imagesContainer > .down:hover {
-    animation: scrollVerticalDown 10s linear infinite;
+  .imagesContainer > .down:hover {
+    animation: scrollVerticalLeft 10s linear infinite;
     animation-play-state: paused;
-}
-}
+  }
 
-@keyframes scrollVerticalUp {
+  @media (min-width: 768px) {
+    .imagesContainer > .up {
+      animation: scrollVerticalUp 10s linear infinite;
+    }
+
+    .imagesContainer > .up:hover {
+      animation: scrollVerticalUp 10s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .imagesContainer > .down {
+      animation: scrollVerticalDown 10s linear infinite;
+    }
+
+    .imagesContainer > .down:hover {
+      animation: scrollVerticalDown 10s linear infinite;
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes scrollVerticalUp {
     0% {
-        transform: translateY(0%);
+      transform: translateY(0%);
     }
     100% {
-        transform: translateY(-50%);
+      transform: translateY(-50%);
     }
-}
+  }
 
-@keyframes scrollVerticalRight {
+  @keyframes scrollVerticalRight {
     0% {
-        transform: translateX(0%);
+      transform: translateX(0%);
     }
     100% {
-        transform: translateX(-50%);
+      transform: translateX(-50%);
     }
-}
+  }
 
-@keyframes scrollVerticalDown {
+  @keyframes scrollVerticalDown {
     0% {
-        transform: translateY(-50%);
+      transform: translateY(-50%);
     }
     100% {
-        transform: translateY(0%);
+      transform: translateY(0%);
     }
-}
+  }
 
-@keyframes scrollVerticalLeft {
+  @keyframes scrollVerticalLeft {
     0% {
-        transform: translateX(-50%);
+      transform: translateX(-50%);
     }
     100% {
-        transform: translateX(0%);
+      transform: translateX(0%);
     }
-}
+  }
 </style>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#gallery",
+    children: "a",
+    pswpModule: () => import("photoswipe"),
+  });
+  lightbox.init();
+
+  document.querySelectorAll(".gallery-image").forEach((image) => {
+    image.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const imageIndex = target.getAttribute("data-image-index");
+      const lightboxElem = document.getElementById(`image-${imageIndex}`);
+      if(!lightboxElem) return
+
+      lightboxElem.click();
+    });
+  });
+</script>
