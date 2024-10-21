@@ -9,8 +9,8 @@ const { className, props } = Astro.props;
 
 <div
   {...props}
-  class={"w-full bg-white shadow-lg rounded-xl p-8 border-2 border-neutral-200/50 " +
-    className}
+  class={
+    " w-full bg-white shadow-lg rounded-xl p-8 border-2 border-neutral-200/50 " + className}
 >
   <slot />
 </div>

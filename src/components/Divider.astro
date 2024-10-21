@@ -1,1 +1,9 @@
-<div aria-hidden="true" class="w-full h-[1px] bg-neutral-200/80"></div>
+---
+interface Props {
+    variant? : "horizontal" | "vertical";
+}
+
+const variant = (Astro.props as Props).variant ?? "horizontal";
+---
+
+<div aria-hidden="true" class={`${variant == "horizontal" ? "w-full h-[1px]" : "w-[1px] h-full"} bg-neutral-200/80`}></div>
