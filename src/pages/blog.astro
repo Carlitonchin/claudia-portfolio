@@ -1,0 +1,20 @@
+---
+import { getAboutData } from "@/api/about";
+import { getBlogPosts } from "@/api/blog";
+import BlogCard from "@/components/BlogCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const blogPosts = await getBlogPosts();
+const aboutData =
+  await getAboutData();
+---
+
+<Layout title={"Claudia Marin | Blog"}>
+  <section class="mb-8 flex flex-col gap-y-8 sm:gap-y-4 lg:gap-y-8">
+    {
+      blogPosts.map((post) => (
+        <BlogCard post={post} aboutData={aboutData} />
+      ))
+    }
+  </section>
+</Layout>

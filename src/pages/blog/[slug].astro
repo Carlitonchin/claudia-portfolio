@@ -1,0 +1,23 @@
+---
+import "./blog.css"
+import { getBlogPosts, getBlogPostBySlug } from '@/api/blog';
+
+import Layout from '@/layouts/Layout.astro';
+import { convertRichTextToHTML } from '@/utils/lexical-gpt';
+
+export async function getStaticPaths() {
+  const blogPosts = await getBlogPosts();
+  return blogPosts.map((post) => {
+    return { params: { slug: post.slug } };
+  });
+}
+
+const { slug } = Astro.params;
+const post = await getBlogPostBySlug(slug);
+
+const html = convertRichTextToHTML(post.post)
+---
+
+<Layout title={"Claudia Marin | " + slug}>
+  <div class="markdown-body pb-8" set:html={html}></div>
+</Layout>
