@@ -15,7 +15,7 @@ export interface BlogCategory {
     name: string
 }
 
-export const getBlogPostBySlug = async (slug: string): Promise<BlogPost[]> => {
+export const getBlogPostBySlug = async (slug: string): Promise<BlogPost> => {
     const response = await getData(`
         {
   getBlog(where:{slug:"${slug}"}){
@@ -27,7 +27,7 @@ export const getBlogPostBySlug = async (slug: string): Promise<BlogPost[]> => {
   }
 }`);
 
-    return response.listBlogPosts.data
+    return response.getBlog.data
 }
 
 export const getBlogPosts = async (): Promise<BlogPost[]> => {

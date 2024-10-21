@@ -1,57 +1,19 @@
 ---
 import { getAboutData } from "@/api/about";
 import { getBlogPosts } from "@/api/blog";
-import Card from "@/components/Card.astro";
-import Divider from "@/components/Divider.astro";
-import ArrowUpRight from "@/components/icons/ArrowUpRight.astro";
-import Title from "@/components/Title.astro";
+import BlogCard from "@/components/BlogCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { formatDate } from 'date-fns'
-import { ptBR} from 'date-fns/locale'
 
 const blogPosts = await getBlogPosts();
-const { email, name, alt, image } =
+const aboutData =
   await getAboutData();
 ---
 
 <Layout title={"Claudia Marin | Blog"}>
-  <section class="mb-8">
+  <section class="mb-8 flex flex-col gap-y-8 sm:gap-y-4 lg:gap-y-8">
     {
       blogPosts.map((post) => (
-        <a 
-        href={`/blog/${post.slug}`}>
-        <Card
-          props={{ "data-delayanimation": "100" }}
-          noPadding 
-          className="js-scroll group relative p-0 flex flex-col md:flex-row h-fit md:h-80 overflow-hidden hover:scale-[1.02] duration-500">
-            <span class="absolute top-1.5 right-1.5 lg:top-3 lg:right-3 rounded-full shadow-[0_0_5px_1px_rgba(0,0,0,0.1)] bg-white p-2.5">
-            <ArrowUpRight />
-            </span>
-            <div class="rounded-xl h-72 sm:h-96 w-full md:h-full md:w-5/12 overflow-hidden">
-          <img class="w-full h-full object-cover" src={post.image} alt={post.alt} />
-        </div>
-          <div class="w-full h-full md:w-7/12 my-auto flex flex-col justify-center items-center px-4 py-8 lg:px-8">
-            <div class="w-full mb-2 flex items-center gap-x-2">
-                {post.category && <span>{post.category.name}</span>
-                <Divider variant="vertical"/>}
-                <span>{formatDate(post.firstPublishedOn, "dd MMM yyyy", { locale: ptBR })}</span>
-            </div>
-            <Title className="group-hover:text-primary duration-500 mb-2 sm:mb-1 lg:mb-2" variant="h2" size="large">{post.title}</Title>
-            <p class="mb-5 sm:mb-2 md:mb-3 lg:mb-5">{post.description}</p>
-            <Divider/>
-
-            <div class="w-full flex mt-4 sm:mt-2 md:mt-3 lg:mt-4">
-               
-                <img alt={alt} class="w-12 h-12 rounded-full" src={image} />
-         
-                <div class="flex justify-center ml-2 flex-col">
-                    <Title  variant="span" size="normal">{name}</Title>
-                    <p>{email}</p>
-                </div>
-            </div>
-          </div>
-        </Card>
-        </a>
+        <BlogCard post={post} aboutData={aboutData} />
       ))
     }
   </section>
