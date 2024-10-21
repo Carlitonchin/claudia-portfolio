@@ -1,16 +1,17 @@
 ---
 interface Props {
   className?: string;
+  noPadding?: boolean;
   props?: object;
 }
 
-const { className, props } = Astro.props;
+const { className, noPadding, props } = Astro.props as Props;
 ---
 
 <div
   {...props}
   class={
-    " w-full bg-white shadow-lg rounded-xl p-8 border-2 border-neutral-200/50 " + className}
+   ` w-full bg-white shadow-lg rounded-xl ${!Boolean(noPadding) && "p-8"} border-2 border-neutral-200/50 ` + className}
 >
   <slot />
 </div>

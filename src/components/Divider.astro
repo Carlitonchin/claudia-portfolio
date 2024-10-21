@@ -1,9 +1,14 @@
 ---
 interface Props {
     variant? : "horizontal" | "vertical";
+    size? : number;
 }
 
-const variant = (Astro.props as Props).variant ?? "horizontal";
+const { variant = "horizontal",  size = 1} = Astro.props as Props;
+
 ---
 
-<div aria-hidden="true" class={`${variant == "horizontal" ? "w-full h-[1px]" : "w-[1px] h-full"} bg-neutral-200/80`}></div>
+<div
+    style={variant == "horizontal" ? {height: size + "px"} : {width: size + "px"}}
+    aria-hidden="true" 
+    class={`${variant == "horizontal" ? "w-full" : "h-full"} bg-neutral-200/80`}></div>
